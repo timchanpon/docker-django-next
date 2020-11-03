@@ -1,0 +1,11 @@
+# Django
+*.pyc
+*/__pycache__
+
+# Docker
+.env
+/docker/db/mysql
+
+# Others
+.vscode
+.DS_Store
