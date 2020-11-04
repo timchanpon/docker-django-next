@@ -1,5 +1,16 @@
 version: '3'
 services:
+  front:
+    build: ./docker/front
+    depends_on:
+      - back
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./react:/var/www/html
+    container_name: react
+    command: yarn start
+
   back:
     build: ./docker/back
     env_file: ./docker/.env
