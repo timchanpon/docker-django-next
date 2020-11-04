@@ -1,20 +1,22 @@
 version: '3'
 services:
-  app:
-    build: ./docker/app
+  back:
+    build: ./docker/back
     env_file: ./docker/.env
     depends_on:
       - db
     ports:
       - '8000:8000'
     volumes:
-      - .:/var/www/html
-    container_name: django-app
-    command: bash -c 'export `python3 docker/keygenerator.py` && python3 manage.py runserver 0:8000'
+      - ./apps:/var/www/html/apps
+      - ./config:/var/www/html/config
+      - ./manage.py:/var/www/html/manage.py
+    container_name: django
+    command: bash -c 'export `python3 /var/src/keygenerator.py` && python3 manage.py runserver 0:8000'
 
   db:
     image: mysql:5.7
     env_file: ./docker/.env
     volumes:
       - ./docker/db/mysql:/var/lib/mysql
-    container_name: django-db
+    container_name: mysql
