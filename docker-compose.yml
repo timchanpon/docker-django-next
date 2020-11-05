@@ -39,6 +39,7 @@ services:
     command: >
       bash -c "
         export `python3 /var/src/keygenerator.py`
+        python3 manage.py collectstatic
         python3 manage.py runserver 0:8000
       "
 
