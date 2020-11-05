@@ -9,5 +9,3 @@ RUN mkdir -p /var/www/html
 RUN mv /tmp/keygenerator.py /var/src/
 RUN pip install -r /tmp/requirements.txt
 RUN rm -rf /tmp/*
-
-WORKDIR /var/www/html

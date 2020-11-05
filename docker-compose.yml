@@ -7,7 +7,8 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - ./react:/var/www/html
+      - ./react:/var/www/html/react
+    working_dir: /var/www/html/react
     container_name: react
     command: yarn start
 
@@ -19,9 +20,8 @@ services:
     ports:
       - '8000:8000'
     volumes:
-      - ./apps:/var/www/html/apps
-      - ./config:/var/www/html/config
-      - ./manage.py:/var/www/html/manage.py
+      - ./django:/var/www/html/django
+    working_dir: /var/www/html/django
     container_name: django
     command: bash -c 'export `python3 /var/src/keygenerator.py` && python3 manage.py runserver 0:8000'
 
