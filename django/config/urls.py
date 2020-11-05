@@ -19,5 +19,5 @@ from django.urls import path
 from django.contrib import admin
 
 urlpatterns = [
-	path(os.environ.get('ADMIN_SITE_PATH'), admin.site.urls),
+	path(os.environ.get('ADMIN_SITE_PATH') + '/', admin.site.urls),
 ]
