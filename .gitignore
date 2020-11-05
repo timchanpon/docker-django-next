@@ -5,6 +5,7 @@
 # Docker
 .env
 /docker/db/mysql
+/docker/web/logs
 
 # Others
 .vscode
