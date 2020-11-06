@@ -146,3 +146,7 @@ STATIC_ROOT = '/var/www/html/static'
 
 # Add apps/ to the Python path
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
+
+
+# Register CustomUser model
+AUTH_USER_MODEL = 'users.CustomUser'
