@@ -7,5 +7,7 @@ ADD . /tmp/
 RUN mkdir /var/src
 RUN mkdir -p /var/www/html
 RUN mv /tmp/keygenerator.py /var/src/
+
+RUN echo 'export `python3 /var/src/keygenerator.py`' >> ~/.bashrc
 RUN pip install -r /tmp/requirements.txt
 RUN rm -rf /tmp/*
