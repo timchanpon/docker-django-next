@@ -51,6 +51,8 @@ INSTALLED_APPS = [
 
 	'corsheaders',
 	'rest_framework',
+
+	'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +146,26 @@ STATIC_ROOT = '/var/www/html/static'
 
 # Add apps/ to the Python path
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
+
+
+# Register CustomUser model
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
+# Rest framework and JWT settings
+# https://jpadilla.github.io/django-rest-framework-jwt/
+
+REST_FRAMEWORK = {
+	# Set default auth middlewares
+	'DEFAULT_PERMISSION_CLASSES': [
+		'rest_framework.permissions.IsAuthenticated',
+	],
+	'DEFAULT_AUTHENTICATION_CLASSES': [
+		'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+	],
+}
+
+JWT_AUTH = {
+	# JWTs never expire
+	'JWT_VERIFY_EXPIRATION': False,
+}
