@@ -7,6 +7,10 @@
 /docker/db/mysql
 /docker/web/logs
 
+# Next
+*/.next
+*/node_modules
+
 # Others
 .vscode
 .DS_Store

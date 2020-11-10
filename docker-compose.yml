@@ -20,12 +20,12 @@ services:
       "
 
   front:
-    build: ./docker/front
+    image: node:12
+    container_name: next
     volumes:
-      - ./react:/var/www/html/react
-    working_dir: /var/www/html/react
-    container_name: react
-    command: yarn start
+      - ./next:/usr/src/next
+    working_dir: /usr/src/next
+    command: yarn dev
 
   back:
     build: ./docker/back
