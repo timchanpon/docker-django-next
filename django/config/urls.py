@@ -21,7 +21,11 @@ from django.urls import path, include
 from rest_framework_jwt.views import obtain_jwt_token
 
 api = [
+	# Auth
 	path('auth-emit-jwt', obtain_jwt_token),
+
+	# Apps
+	path('users/', include('users.urls')),
 ]
 
 urlpatterns = [
