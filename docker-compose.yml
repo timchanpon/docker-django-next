@@ -2,6 +2,7 @@ version: '3'
 services:
   web:
     image: nginx:1.16.0
+    container_name: nginx
     env_file: ./docker/.env
     depends_on:
       - back
@@ -12,7 +13,6 @@ services:
       - ./docker/web/logs:/var/log/nginx
       - ./docker/web/default.conf.template:/etc/nginx/conf.d/default.conf.template
     working_dir: /etc/nginx/conf.d
-    container_name: nginx
     command: >
       bash -c "
         envsubst '$$ADMIN_SITE_PATH' < default.conf.template > default.conf
@@ -29,13 +29,13 @@ services:
 
   back:
     build: ./docker/back
+    container_name: django
     env_file: ./docker/.env
     depends_on:
       - db
     volumes:
       - ./django:/var/www/html/django
     working_dir: /var/www/html/django
-    container_name: django
     command: >
       bash -c "
         export `python3 /var/src/keygenerator.py`
@@ -45,7 +45,7 @@ services:
 
   db:
     image: mysql:5.7
+    container_name: mysql
     env_file: ./docker/.env
     volumes:
       - ./docker/db/mysql:/var/lib/mysql
-    container_name: mysql
