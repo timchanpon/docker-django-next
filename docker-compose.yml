@@ -34,11 +34,11 @@ services:
     depends_on:
       - db
     volumes:
-      - ./django:/var/www/html/django
-    working_dir: /var/www/html/django
+      - ./django:/usr/src/django
+    working_dir: /usr/src/django
     command: >
       bash -c "
-        export `python3 /var/src/keygenerator.py`
+        export `python3 /usr/src/keygenerator.py`
         python3 manage.py collectstatic
         python3 manage.py runserver 0:8000
       "
