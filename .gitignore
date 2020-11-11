@@ -3,10 +3,14 @@
 */__pycache__
 
 # Docker
-.env
+*.env
 /docker/db/mysql
 /docker/web/logs
 
+# Next
+*.next
+*/node_modules
+
 # Others
-.vscode
-.DS_Store
+*.vscode
+*.DS_Store

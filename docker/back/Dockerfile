@@ -4,10 +4,9 @@ ENV PYTHONUNBUFFERED 1
 
 ADD . /tmp/
 
-RUN mkdir /var/src
 RUN mkdir -p /var/www/html
-RUN mv /tmp/keygenerator.py /var/src/
+RUN mv /tmp/keygenerator.py /usr/src/
 
-RUN echo 'export `python3 /var/src/keygenerator.py`' >> ~/.bashrc
+RUN echo 'export `python3 /usr/src/keygenerator.py`' >> ~/.bashrc
 RUN pip install -r /tmp/requirements.txt
 RUN rm -rf /tmp/*
