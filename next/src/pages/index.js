@@ -1,7 +1,5 @@
-const Home = () => (
-	<div>
-		<h1>Home</h1>
-	</div>
-);
+function Index() {
+	return <h1>Hello</h1>;
+}
 
-export default Home;
+export default Index;
