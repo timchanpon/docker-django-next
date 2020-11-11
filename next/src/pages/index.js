@@ -1,9 +1,7 @@
-import Root from '../bases/Root';
-
 const Home = () => (
-	<Root>
+	<div>
 		<h1>Home</h1>
-	</Root>
+	</div>
 );
 
 export default Home;
