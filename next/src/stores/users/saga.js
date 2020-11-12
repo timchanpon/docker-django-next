@@ -23,6 +23,6 @@ function* login({ credentials }) {
 	}
 }
 
-export default function* () {
+export default function* usersSaga() {
 	yield takeLatest('users/login', login);
 }
