@@ -35,8 +35,8 @@ function Index(props) {
 			<button onClick={methods.login}>LOGIN</button>
 			<button onClick={methods.logout}>LOGOUT</button>
 
-			<p>Your name: {props.users.name}</p>
-			<p>Your email: {props.users.email}</p>
+			<p>Your name: {props.user.name}</p>
+			<p>Your email: {props.user.email}</p>
 		</>
 	);
 }
