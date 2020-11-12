@@ -1,5 +1,11 @@
-function Index() {
+import { connect } from 'react-redux';
+
+function Index(props) {
 	return <h1>Hello</h1>;
 }
 
-export default Index;
+function mapStateToProps(state) {
+	return state;
+};
+
+export default connect(mapStateToProps)(Index);
