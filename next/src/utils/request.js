@@ -3,8 +3,8 @@ import axios from 'axios';
 import config from '../config';
 import { getJWT } from '../utils/storage';
 
-function axiosInstance(isWithAuth) {
-	const auth = isWithAuth ? `JWT ${getJWT()}` : '';
+function axiosInstance(withAuth) {
+	const auth = withAuth ? `JWT ${getJWT()}` : '';
 
 	return axios.create({
 		baseURL: config.apiEndPoint,
@@ -15,11 +15,9 @@ function axiosInstance(isWithAuth) {
 	});
 }
 
-export function callApi({ isWithAuth, ...options }) {
-	return new Promise((resolve, reject) => {
-		axiosInstance
-			.request({ ...options })
-			.then(res => resolve(res))
-			.catch(err => reject(err));
-	});
+export async function callAPI({ withAuth, ...options }) {
+	return axiosInstance(withAuth)
+					.request({ ...options })
+					.then(res => res)
+					.catch(err => err);
 }
