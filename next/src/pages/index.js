@@ -10,28 +10,30 @@ function Index(props) {
 		password: e => setPassword(e.target.value),
 	};
 
-	const login = () => {
-		const action = {
-			type: 'users/login',
-			credentials: {
-				username: username,
-				password: password,
-			},
-		};
+	const methods = {
+		login() {
+			const action = {
+				type: 'users/login',
+				credentials: {
+					username: username,
+					password: password,
+				},
+			};
 
-		props.dispatch(action);
-	};
-
-	const logout = () => {
-		props.dispatch({ type: 'users/logout' });
+			props.dispatch(action);
+		},
+		logout() {
+			props.dispatch({ type: 'users/logout' });
+		},
 	};
 
 	return (
 		<>
 			<input type="text" onChange={inputHandlers.username} />
 			<input type="password" onChange={inputHandlers.password} />
-			<button onClick={login}>LOGIN</button>
-			<button onClick={logout}>LOGOUT</button>
+
+			<button onClick={methods.login}>LOGIN</button>
+			<button onClick={methods.logout}>LOGOUT</button>
 
 			<p>Your name: {props.users.name}</p>
 			<p>Your email: {props.users.email}</p>
