@@ -1,4 +1,4 @@
-const moduleName = 'users';
+const modulePrefix = 'users/';
 
 const initialState = {
 	name: '',
@@ -6,16 +6,17 @@ const initialState = {
 };
 
 function usersReducer(state=initialState, action) {
-	switch (action.type) {
-		case `${moduleName}/setUserData`:
-			return {
-				...state,
-				name: action.payload.name,
-				email: action.payload.email,
-			};
-		default:
-			return state;
+	const type = action.type.replace(modulePrefix, '');
+
+	if (type === 'setUserData') {
+		state = {
+			...state,
+			name: action.payload.name,
+			email: action.payload.email,
+		};
 	}
+
+	return state;
 }
 
 export default usersReducer;
