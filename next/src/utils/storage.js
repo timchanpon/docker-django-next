@@ -1,15 +1,13 @@
-import { jwtStorageKey } from '../config';
+import config from '../config';
 
-function getJWT() {
-	return localStorage.getItem(jwtStorageKey);
+export function getJWT() {
+	return localStorage.getItem(config.jwtStorageKey);
 }
 
-function setJWT(jwt) {
-	localStorage.setItem(jwtStorageKey, jwt);
+export function setJWT(jwt) {
+	localStorage.setItem(config.jwtStorageKey, jwt);
 }
 
-function removeJWT() {
-	localStorage.removeItem(jwtStorageKey);
+export function removeJWT() {
+	localStorage.removeItem(config.jwtStorageKey);
 }
-
-export { getJWT, setJWT, removeJWT };

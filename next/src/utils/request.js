@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-import storage from '../utils/storage';
-import { apiEndPoint } from '../config';
+import config from '../config';
+import { getJWT } from '../utils/storage';
 
 function axiosInstance(isWithAuth) {
-	const auth = isWithAuth ? `JWT ${storage.getJWT()}` : '';
+	const auth = isWithAuth ? `JWT ${getJWT()}` : '';
 
 	return axios.create({
-		baseURL: apiEndPoint,
+		baseURL: config.apiEndPoint,
 		headers: {
 			'Accept': 'application/json',
 			'Authorization': auth,
@@ -15,14 +15,11 @@ function axiosInstance(isWithAuth) {
 	});
 }
 
-function callApi({ isWithAuth, ...options }) {
-	axiosInstance.request({
-		...options,
-	}).then(res => {
-		resolve(res);
-	}).catch(err => {
-		reject(err);
+export function callApi({ isWithAuth, ...options }) {
+	return new Promise((resolve, reject) => {
+		axiosInstance
+			.request({ ...options })
+			.then(res => resolve(res))
+			.catch(err => reject(err));
 	});
 }
-
-export { callApi };
