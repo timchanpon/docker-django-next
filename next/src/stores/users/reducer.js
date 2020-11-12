@@ -1,3 +1,5 @@
+import { removeJWT } from '../../utils/storage';
+
 const modulePrefix = 'users/';
 
 const initialState = {
@@ -13,6 +15,14 @@ function usersReducer(state=initialState, action) {
 			...state,
 			name: action.payload.name,
 			email: action.payload.email,
+		};
+	} else if (type === 'logout') {
+		removeJWT();
+
+		state = {
+			...state,
+			name: '',
+			email: '',
 		};
 	}
 
