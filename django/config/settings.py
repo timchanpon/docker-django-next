@@ -99,7 +99,7 @@ DATABASES = {
 		'PASSWORD': os.environ.get('DB_PASSWORD'),
 		'HOST': 'db',
 		'PORT': '3306',
-	}
+	},
 }
 
 
@@ -168,4 +168,15 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
 	# JWTs never expire
 	'JWT_VERIFY_EXPIRATION': False,
+}
+
+
+# Cache settings
+# https://docs.djangoproject.com/en/3.1/topics/cache/
+
+CACHES = {
+	'default': {
+		'BACKEND': 'django_redis.cache.RedisCache',
+		'LOCATION': 'redis://cache:6379/',
+	},
 }

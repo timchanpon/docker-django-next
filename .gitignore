@@ -6,6 +6,7 @@
 *.env
 /docker/db/mysql
 /docker/web/logs
+/docker/cache/data
 
 # Next
 *.next
