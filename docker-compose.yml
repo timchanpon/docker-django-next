@@ -33,6 +33,7 @@ services:
     env_file: ./docker/.env
     depends_on:
       - db
+      - cache
     volumes:
       - ./django:/usr/src/django
     working_dir: /usr/src/django
@@ -49,3 +50,11 @@ services:
     env_file: ./docker/.env
     volumes:
       - ./docker/db/mysql:/var/lib/mysql
+
+  cache:
+    image: redis:5-alpine
+    container_name: redis
+    volumes:
+      - ./docker/cache/data:/data
+      - ./docker/cache/redis.conf:/etc/redis/redis.conf
+    command: redis-server /etc/redis/redis.conf
