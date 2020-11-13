@@ -56,3 +56,5 @@ services:
     container_name: redis
     volumes:
       - ./docker/cache/data:/data
+      - ./docker/cache/redis.conf:/etc/redis/redis.conf
+    command: redis-server /etc/redis/redis.conf
