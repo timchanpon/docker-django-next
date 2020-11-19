@@ -5,7 +5,7 @@ import { callAPI } from '../../utils/request';
 function* login({ credentials }) {
 	const options = {
 		method: 'POST',
-		url: '/auth-emit-jwt',
+		url: '/users/login',
 		data: {
 			username: credentials.username,
 			password: credentials.password,

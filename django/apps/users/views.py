@@ -4,6 +4,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 
+class Logout(APIView):
+
+	def post(self, request):
+		cookie = os.environ.get('JWT_AUTH_COOKIE')
+
+		response = Response()
+		response.set_cookie(cookie, '', max_age=0)
+
+		return response
+
+
 class UserData(APIView):
 
 	def get(self, request):
@@ -15,12 +26,5 @@ class UserData(APIView):
 		return Response(data)
 
 
-class LogOut(APIView):
-
-	def post(self, request):
-		cookie = os.environ.get('JWT_AUTH_COOKIE')
-
-		response = Response()
-		response.set_cookie(cookie, '', max_age=0)
-
-		return response
+logout = Logout.as_view()
+user_data = UserData.as_view()
