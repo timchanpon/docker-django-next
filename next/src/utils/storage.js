@@ -1,13 +1,15 @@
+import cookie from 'js-cookie';
+
 import config from '../config';
 
 export function getJWT() {
-	return localStorage.getItem(config.jwtStorageKey);
+	return cookie.get(config.jwtStorageKey);
 }
 
 export function setJWT(jwt) {
-	localStorage.setItem(config.jwtStorageKey, jwt);
+	cookie.set(config.jwtStorageKey, jwt, { expires: 1 });
 }
 
 export function removeJWT() {
-	localStorage.removeItem(config.jwtStorageKey);
+	cookie.remove(config.jwtStorageKey);
 }
