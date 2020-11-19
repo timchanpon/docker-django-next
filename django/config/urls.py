@@ -24,5 +24,5 @@ api = [
 
 urlpatterns = [
 	path('api/', include(api)),
-	path(os.environ.get('ADMIN_SITE_PATH') + '/', admin.site.urls),
+	path(os.getenv('ADMIN_SITE_PATH') + '/', admin.site.urls),
 ]
