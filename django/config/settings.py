@@ -168,6 +168,9 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
 	# JWTs never expire
 	'JWT_VERIFY_EXPIRATION': False,
+
+	# JWTs are transmitted via cookie
+	'JWT_AUTH_COOKIE': os.environ.get('JWT_AUTH_COOKIE'),
 }
 
 
