@@ -20,6 +20,20 @@ function* login({ credentials }) {
 	}
 }
 
+function* logout() {
+	const options = {
+		method: 'POST',
+		url: '/users/logout',
+	};
+
+	try {
+		yield call(callAPI, options);
+		yield put({ type: 'users/clearUserData' });
+	} catch (err) {
+		return console.error(err);
+	}
+}
+
 function* fetchUserData() {
 	const options = {
 		method: 'GET',
@@ -41,5 +55,6 @@ function* fetchUserData() {
 
 export default function* usersSaga() {
 	yield takeLatest('users/login', login);
+	yield takeLatest('users/logout', logout);
 	yield takeLatest('users/fetchUserData', fetchUserData);
 }

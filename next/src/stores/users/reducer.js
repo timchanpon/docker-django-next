@@ -14,9 +14,7 @@ function usersReducer(state=initialState, action) {
 			name: action.payload.name,
 			email: action.payload.email,
 		};
-	} else if (type === 'logout') {
-		// removeJWT();
-
+	} else if (type === 'clearUserData') {
 		state = {
 			...state,
 			name: '',
