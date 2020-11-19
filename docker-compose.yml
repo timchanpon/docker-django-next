@@ -33,7 +33,6 @@ services:
     env_file: ./docker/.env
     depends_on:
       - db
-      - cache
     volumes:
       - ./django:/usr/src/django
     working_dir: /usr/src/django
