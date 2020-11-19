@@ -1,13 +1,11 @@
 import { call, fork, put, takeLatest } from 'redux-saga/effects';
 
-import { setJWT } from '../../utils/storage';
 import { callAPI } from '../../utils/request';
 
 function* login({ credentials }) {
 	const options = {
-		withAuth: false,
 		method: 'POST',
-		url: '/auth-emit-jwt',
+		url: '/users/login',
 		data: {
 			username: credentials.username,
 			password: credentials.password,
@@ -15,10 +13,22 @@ function* login({ credentials }) {
 	};
 
 	try {
-		const { data } = yield call(callAPI, options);
-
-		setJWT(data.token);
+		yield call(callAPI, options);
 		yield fork(fetchUserData);
+	} catch (err) {
+		return console.error(err);
+	}
+}
+
+function* logout() {
+	const options = {
+		method: 'POST',
+		url: '/users/logout',
+	};
+
+	try {
+		yield call(callAPI, options);
+		yield put({ type: 'users/clearUserData' });
 	} catch (err) {
 		return console.error(err);
 	}
@@ -26,7 +36,6 @@ function* login({ credentials }) {
 
 function* fetchUserData() {
 	const options = {
-		withAuth: true,
 		method: 'GET',
 		url: '/users/data',
 	};
@@ -46,5 +55,6 @@ function* fetchUserData() {
 
 export default function* usersSaga() {
 	yield takeLatest('users/login', login);
+	yield takeLatest('users/logout', logout);
 	yield takeLatest('users/fetchUserData', fetchUserData);
 }

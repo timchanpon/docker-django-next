@@ -1,5 +1,6 @@
 version: '3'
 services:
+  # Proxy Server
   web:
     image: nginx:1.16.0
     container_name: nginx
@@ -19,6 +20,7 @@ services:
         nginx -g 'daemon off;'
       "
 
+  # Applications
   front:
     image: node:12
     container_name: next
@@ -26,14 +28,12 @@ services:
       - ./next:/usr/src/next
     working_dir: /usr/src/next
     command: yarn dev
-
   back:
     build: ./docker/back
     container_name: django
     env_file: ./docker/.env
     depends_on:
       - db
-      - cache
     volumes:
       - ./django:/usr/src/django
     working_dir: /usr/src/django
@@ -44,13 +44,13 @@ services:
         python3 manage.py runserver 0:8000
       "
 
+  # Storages
   db:
     image: mysql:5.7
     container_name: mysql
     env_file: ./docker/.env
     volumes:
       - ./docker/db/mysql:/var/lib/mysql
-
   cache:
     image: redis:5-alpine
     container_name: redis

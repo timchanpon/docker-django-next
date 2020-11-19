@@ -18,17 +18,11 @@ import os
 from django.contrib import admin
 from django.urls import path, include
 
-from rest_framework_jwt.views import obtain_jwt_token
-
 api = [
-	# Auth
-	path('auth-emit-jwt', obtain_jwt_token),
-
-	# Apps
 	path('users/', include('users.urls')),
 ]
 
 urlpatterns = [
 	path('api/', include(api)),
-	path(os.environ.get('ADMIN_SITE_PATH') + '/', admin.site.urls),
+	path(os.getenv('ADMIN_SITE_PATH') + '/', admin.site.urls),
 ]

@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -94,9 +94,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
-		'NAME': os.environ.get('DB_NAME'),
-		'USER': os.environ.get('DB_USER'),
-		'PASSWORD': os.environ.get('DB_PASSWORD'),
+		'NAME': os.getenv('DB_NAME'),
+		'USER': os.getenv('DB_USER'),
+		'PASSWORD': os.getenv('DB_PASSWORD'),
 		'HOST': 'db',
 		'PORT': '3306',
 	},
@@ -125,9 +125,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = os.environ.get('LANGUAGE_CODE')
+LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')
 
-TIME_ZONE = os.environ.get('TIME_ZONE')
+TIME_ZONE = os.getenv('TIME_ZONE')
 
 USE_I18N = True
 
@@ -168,6 +168,9 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
 	# JWTs never expire
 	'JWT_VERIFY_EXPIRATION': False,
+
+	# JWTs are transmitted via cookie
+	'JWT_AUTH_COOKIE': os.getenv('JWT_AUTH_COOKIE'),
 }
 
 
@@ -179,7 +182,7 @@ CACHES = {
 		'BACKEND': 'django_redis.cache.RedisCache',
 		'LOCATION': 'redis://cache:6379/0',
 		'OPTIONS': {
-			'PASSWORD': os.environ.get('REDIS_PASSWORD'),
+			'PASSWORD': os.getenv('REDIS_PASSWORD'),
 		},
 	},
 }
