@@ -148,8 +148,8 @@ STATIC_ROOT = '/var/www/html/static'
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
 
-# Register CustomUser model
-AUTH_USER_MODEL = 'users.CustomUser'
+# Register custom User model
+AUTH_USER_MODEL = 'users.User'
 
 
 # Rest framework and JWT settings
