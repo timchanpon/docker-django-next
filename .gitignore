@@ -1,17 +1,17 @@
 # Django
-*.pyc
-*/__pycache__
+/django/**/migrations
+/django/**/__pycache__
 
 # Docker
-*.env
+/docker/.env
 /docker/db/mysql
 /docker/web/logs
 /docker/cache/data
 
 # Next
-*.next
-*/node_modules
+/next/.next
+/next/node_modules
 
-# Others
+# Common
 *.vscode
 *.DS_Store
