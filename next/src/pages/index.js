@@ -37,6 +37,12 @@ function Index(props) {
 
 			<p>Your name: {props.user.name}</p>
 			<p>Your email: {props.user.email}</p>
+			<div>
+				Your todos:
+				<ul>
+					{props.user.todos.map((todo, index) => <li key={index}>{todo.body}</li>)}
+				</ul>
+			</div>
 		</>
 	);
 }

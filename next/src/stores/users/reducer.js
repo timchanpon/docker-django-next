@@ -3,7 +3,7 @@ const modulePrefix = 'users/';
 const initialState = {
 	name: '',
 	email: '',
-	todos: null,
+	todos: [],
 };
 
 function usersReducer(state=initialState, action) {
