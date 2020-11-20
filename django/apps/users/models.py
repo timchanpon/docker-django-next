@@ -4,9 +4,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-class CustomUser(AbstractUser):
+class User(AbstractUser):
 	id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
 
 
 	class Meta:
-		verbose_name_plural = 'CustomUser'
+		db_table = 'users'
