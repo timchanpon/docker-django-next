@@ -3,6 +3,7 @@ const modulePrefix = 'users/';
 const initialState = {
 	name: '',
 	email: '',
+	todos: null,
 };
 
 function usersReducer(state=initialState, action) {
@@ -13,13 +14,10 @@ function usersReducer(state=initialState, action) {
 			...state,
 			name: action.payload.name,
 			email: action.payload.email,
+			todos: action.payload.todos,
 		};
 	} else if (type === 'clearUserData') {
-		state = {
-			...state,
-			name: '',
-			email: '',
-		};
+		state = initialState;
 	}
 
 	return state;
