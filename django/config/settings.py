@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 	'corsheaders',
 	'rest_framework',
 
+	'todos.apps.TodosConfig',
 	'users.apps.UsersConfig',
 ]
 
