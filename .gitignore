@@ -1,6 +1,7 @@
 # Django
-/django/**/migrations
 /django/**/__pycache__
+/django/**/migrations/*
+!/django/**/__init__.py
 
 # Docker
 /docker/.env
