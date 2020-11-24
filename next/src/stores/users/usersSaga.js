@@ -1,5 +1,6 @@
 import { call, fork, put, takeLatest } from 'redux-saga/effects';
 
+import { usersAction } from '../actions';
 import { usersProvider } from '../../providers';
 
 function* login({ credentials }) {
@@ -14,7 +15,7 @@ function* login({ credentials }) {
 function* logout() {
 	try {
 		yield call(usersProvider.logout);
-		yield put({ type: 'users/clearUserData' });
+		yield put(usersAction.clearUserData);
 	} catch (err) {
 		return console.error(err);
 	}
@@ -23,10 +24,7 @@ function* logout() {
 function* fetchUserData() {
 	try {
 		const { data } = yield call(usersProvider.fetchUserData);
-		const action = {
-			type: 'users/setUserData',
-			payload: data,
-		};
+		const action = usersAction.setUserData(data);
 
 		yield put(action);
 	} catch (err) {

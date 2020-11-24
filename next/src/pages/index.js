@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 
+import { usersAction } from '../stores/actions';
+
 function Index(props) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -12,18 +14,12 @@ function Index(props) {
 
 	const methods = {
 		login() {
-			const action = {
-				type: 'users/login',
-				credentials: {
-					username: username,
-					password: password,
-				},
-			};
+			const action = usersAction.login(username, password);
 
 			props.dispatch(action);
 		},
 		logout() {
-			props.dispatch({ type: 'users/logout' });
+			props.dispatch(usersAction.logout);
 		},
 	};
 
