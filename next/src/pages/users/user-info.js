@@ -16,9 +16,7 @@ function UserInfo(props) {
 }
 
 export async function getServerSideProps({ req }) {
-	if (process.browser) return;
-
-	const cookie = req ? req.headers.cookie : null;
+	const cookie = req.headers.cookie;
 	const { data } = await usersProvider.fetchUserData(cookie);
 
 	return {
