@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 
+import { usersAction } from '../stores/actions';
+
 function Index(props) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -12,18 +14,12 @@ function Index(props) {
 
 	const methods = {
 		login() {
-			const action = {
-				type: 'users/login',
-				credentials: {
-					username: username,
-					password: password,
-				},
-			};
+			const action = usersAction.saga.login(username, password);
 
 			props.dispatch(action);
 		},
 		logout() {
-			props.dispatch({ type: 'users/logout' });
+			props.dispatch(usersAction.saga.logout);
 		},
 	};
 
@@ -32,8 +28,8 @@ function Index(props) {
 			<input type="text" onChange={inputHandlers.username} />
 			<input type="password" onChange={inputHandlers.password} />
 
-			<button onClick={methods.login}>LOGIN</button>
-			<button onClick={methods.logout}>LOGOUT</button>
+			<button onClick={methods.login} disabled={props.user.name}>LOGIN</button>
+			<button onClick={methods.logout} disabled={!props.user.name}>LOGOUT</button>
 
 			<p>Your name: {props.user.name}</p>
 			<p>Your email: {props.user.email}</p>
