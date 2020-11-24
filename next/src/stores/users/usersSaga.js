@@ -1,19 +1,10 @@
 import { call, fork, put, takeLatest } from 'redux-saga/effects';
 
-import { callAPI } from '../../utils/request';
+import { usersProvider } from '../../providers';
 
 function* login({ credentials }) {
-	const options = {
-		method: 'POST',
-		url: '/users/login',
-		data: {
-			username: credentials.username,
-			password: credentials.password,
-		},
-	};
-
 	try {
-		yield call(callAPI, options);
+		yield call(usersProvider.login, credentials);
 		yield fork(fetchUserData);
 	} catch (err) {
 		return console.error(err);
@@ -21,13 +12,8 @@ function* login({ credentials }) {
 }
 
 function* logout() {
-	const options = {
-		method: 'POST',
-		url: '/users/logout',
-	};
-
 	try {
-		yield call(callAPI, options);
+		yield call(usersProvider.logout);
 		yield put({ type: 'users/clearUserData' });
 	} catch (err) {
 		return console.error(err);
@@ -35,13 +21,8 @@ function* logout() {
 }
 
 function* fetchUserData() {
-	const options = {
-		method: 'GET',
-		url: '/users/data',
-	};
-
 	try {
-		const { data } = yield call(callAPI, options);
+		const { data } = yield call(usersProvider.fetchUserData);
 		const action = {
 			type: 'users/setUserData',
 			payload: data,
