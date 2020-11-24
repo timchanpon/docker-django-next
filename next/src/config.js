@@ -7,4 +7,6 @@ export function getApiEndPoint() {
 	return process.browser ? url.CSR : url.SSR;
 }
 
+export const pathToLoginPage = '/';
+
 export const isAuthCookieName = 'isAuthenticated';

@@ -1,3 +1,4 @@
+import { useAuthGuard } from '../../hooks';
 import { usersProvider } from '../../providers';
 
 function UserInfo(props) {
@@ -15,8 +16,10 @@ function UserInfo(props) {
 	);
 }
 
-export async function getServerSideProps({ req }) {
-	const cookie = req.headers.cookie;
+export async function getServerSideProps(ctx) {
+	useAuthGuard(ctx);
+
+	const cookie = ctx.req.headers.cookie;
 	const { data } = await usersProvider.fetchUserData(cookie);
 
 	return {
