@@ -1,4 +1,4 @@
-import { callAPI } from '../../utils/request';
+import { callAPI } from '../request';
 
 export default {
 	//
