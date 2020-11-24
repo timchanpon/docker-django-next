@@ -14,12 +14,12 @@ function Index(props) {
 
 	const methods = {
 		login() {
-			const action = usersAction.login(username, password);
+			const action = usersAction.saga.login(username, password);
 
 			props.dispatch(action);
 		},
 		logout() {
-			props.dispatch(usersAction.logout);
+			props.dispatch(usersAction.saga.logout);
 		},
 	};
 

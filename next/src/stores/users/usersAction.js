@@ -1,9 +1,20 @@
-export default {
-	logout: {
-		type: 'users/logout',
-	},
+const reducer = {
 	clearUserData: {
 		type: 'users/clearUserData',
+	},
+
+	// With payload
+	setUserData(payload) {
+		return {
+			type: 'users/setUserData',
+			payload: payload,
+		};
+	},
+};
+
+const saga = {
+	logout: {
+		type: 'users/logout',
 	},
 	fetchUserData: {
 		type: 'users/fetchUserData',
@@ -19,10 +30,9 @@ export default {
 			},
 		};
 	},
-	setUserData(payload) {
-		return {
-			type: 'users/setUserData',
-			payload: payload,
-		};
-	},
+};
+
+export default {
+	...reducer,
+	saga: saga,
 };
