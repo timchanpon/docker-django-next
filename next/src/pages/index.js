@@ -28,8 +28,8 @@ function Index(props) {
 			<input type="text" onChange={inputHandlers.username} />
 			<input type="password" onChange={inputHandlers.password} />
 
-			<button onClick={methods.login}>LOGIN</button>
-			<button onClick={methods.logout}>LOGOUT</button>
+			<button onClick={methods.login} disabled={props.user.name}>LOGIN</button>
+			<button onClick={methods.logout} disabled={!props.user.name}>LOGOUT</button>
 
 			<p>Your name: {props.user.name}</p>
 			<p>Your email: {props.user.email}</p>
