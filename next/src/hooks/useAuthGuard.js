@@ -3,23 +3,24 @@ import router from 'next/router';
 
 import { isAuthCookieName, pathToLoginPage } from '../config';
 
+const dummyProps = { data: null };
+
 function authGuardCSR() {
 	const isAuth = cookie.get(isAuthCookieName);
 
-	return isAuth ? {} : router.push(pathToLoginPage);
+	if (!isAuth) router.push(pathToLoginPage);
+
+	return dummyProps;
 }
 
 function authGuardSSR({ req, res }) {
 	const cookie = req.headers.cookie;
 	const isAuth = cookie && cookie.includes(isAuthCookieName + '=True');
 
-	if (isAuth) return {};
+	if (!isAuth)
+		res.writeHead(302, { 'Location': pathToLoginPage }).end();
 
-	res.writeHead(302, {
-		'Location': pathToLoginPage,
-	});
-
-	return res.end();
+	return dummyProps;
 }
 
 export default function useAuthGuard(ctx) {
