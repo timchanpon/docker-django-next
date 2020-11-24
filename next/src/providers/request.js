@@ -11,7 +11,7 @@ export async function callAPI(options) {
 	});
 
 	return axiosInstance
-					.request({ ...options })
+					.request(options)
 					.then(res => res)
 					.catch(err => err);
 }
