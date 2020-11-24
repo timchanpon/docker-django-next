@@ -3,7 +3,7 @@ import router from 'next/router';
 
 import { isAuthCookieName, pathToLoginPage } from '../config';
 
-const dummyProps = { data: null };
+const dummyProps = { props: {} };
 
 function authGuardCSR() {
 	const isAuth = cookie.get(isAuthCookieName);
