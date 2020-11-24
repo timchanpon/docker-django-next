@@ -1,4 +1,5 @@
 import { callAPI } from '../request';
+import { isAuthCookieName } from '../../config';
 
 const appPath = 'users/';
 
@@ -18,6 +19,7 @@ export default {
 			data: {
 				username: credentials.username,
 				password: credentials.password,
+				isAuthCookieName: isAuthCookieName,
 			},
 		});
 	},
@@ -25,6 +27,9 @@ export default {
 		return callAPI({
 			method: 'POST',
 			url: appPath + 'logout',
+			data: {
+				isAuthCookieName: isAuthCookieName,
+			},
 		});
 	},
 	fetchUserData(cookie=null) {

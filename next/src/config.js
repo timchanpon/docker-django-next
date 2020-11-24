@@ -6,3 +6,5 @@ export function getApiEndPoint() {
 
 	return process.browser ? url.CSR : url.SSR;
 }
+
+export const isAuthCookieName = 'isAuthenticated';
