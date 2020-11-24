@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 import sys
+import datetime
 
 from pathlib import Path
 
@@ -160,12 +161,15 @@ REST_FRAMEWORK = {
 	],
 }
 
-JWT_AUTH = {
-	# JWTs never expire
-	'JWT_VERIFY_EXPIRATION': False,
+jwt_expires_sec = os.getenv('JWT_EXPIRATION_DELTA_SECONDS')
+jwt_expires_sec = int(jwt_expires_sec)
 
+JWT_AUTH = {
 	# JWTs are transmitted via cookie
 	'JWT_AUTH_COOKIE': os.getenv('JWT_AUTH_COOKIE'),
+
+	# Expiration date of JWTs in seconds
+	'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=jwt_expires_sec),
 }
 
 
