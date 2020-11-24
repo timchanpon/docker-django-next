@@ -2,6 +2,14 @@ import { callAPI } from '../request';
 
 const appPath = 'users/';
 
+function setHeaders(cookie) {
+	if (!cookie) return {};
+
+	return {
+		'Cookie': cookie,
+	};
+};
+
 export default {
 	login(credentials) {
 		return callAPI({
@@ -19,8 +27,9 @@ export default {
 			url: appPath + 'logout',
 		});
 	},
-	fetchUserData() {
+	fetchUserData(cookie=null) {
 		return callAPI({
+			headers: setHeaders(cookie),
 			method: 'GET',
 			url: appPath + 'data',
 		});
