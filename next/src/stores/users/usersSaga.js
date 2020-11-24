@@ -1,5 +1,6 @@
 import { call, fork, put, takeLatest } from 'redux-saga/effects';
 
+import { modulePrefix } from './config';
 import { usersAction } from '../actions';
 import { usersProvider } from '../../providers';
 
@@ -33,7 +34,7 @@ function* fetchUserData() {
 }
 
 export default function* usersSaga() {
-	yield takeLatest('users/login', login);
-	yield takeLatest('users/logout', logout);
-	yield takeLatest('users/fetchUserData', fetchUserData);
+	yield takeLatest(modulePrefix + 'saga/login', login);
+	yield takeLatest(modulePrefix + 'saga/logout', logout);
+	yield takeLatest(modulePrefix + 'saga/fetchUserData', fetchUserData);
 }

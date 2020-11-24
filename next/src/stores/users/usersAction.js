@@ -1,12 +1,14 @@
+import { modulePrefix } from './config';
+
 const reducer = {
 	clearUserData: {
-		type: 'users/clearUserData',
+		type: modulePrefix + 'clearUserData',
 	},
 
 	// With payload
 	setUserData(payload) {
 		return {
-			type: 'users/setUserData',
+			type: modulePrefix + 'setUserData',
 			payload: payload,
 		};
 	},
@@ -14,16 +16,16 @@ const reducer = {
 
 const saga = {
 	logout: {
-		type: 'users/logout',
+		type: modulePrefix + 'saga/logout',
 	},
 	fetchUserData: {
-		type: 'users/fetchUserData',
+		type: modulePrefix + 'saga/fetchUserData',
 	},
 
 	// With payload
 	login(username, password) {
 		return {
-			type: 'users/login',
+			type: modulePrefix + 'saga/login',
 			credentials: {
 				username: username,
 				password: password,

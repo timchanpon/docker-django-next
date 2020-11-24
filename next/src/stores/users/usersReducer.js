@@ -1,4 +1,4 @@
-const modulePrefix = 'users/';
+import { modulePrefix } from './config';
 
 const initialState = {
 	name: '',
