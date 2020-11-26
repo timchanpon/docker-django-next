@@ -1,25 +1,14 @@
 import '../styles/app.scss';
 
-import Link from 'next/link';
 import { Provider } from 'react-redux';
 
 import store from '../stores/store';
+import HeaderNav from '../components/base/headerNav';
 
 function Root({ Component, pageProps }) {
 	return (
 		<Provider store={store}>
-			<header>
-				<Link href="/">
-					<button className="header-nav-btn">Top</button>
-				</Link>
-				<Link href="/users/user-info">
-					<button className="header-nav-btn">User Info</button>
-				</Link>
-				<Link href="/todos/todo-list">
-					<button className="header-nav-btn">Todo List</button>
-				</Link>
-			</header>
-
+			<HeaderNav />
 			<Component {...pageProps} />
 		</Provider>
 	);
