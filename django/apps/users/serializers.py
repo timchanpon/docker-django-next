@@ -5,7 +5,7 @@ from rest_framework import serializers
 from .models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserWithTodosSerializer(serializers.ModelSerializer):
 	todos = TodoSerializer(many=True, read_only=True)
 
 	class Meta:

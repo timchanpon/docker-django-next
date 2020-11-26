@@ -6,7 +6,7 @@ from rest_framework_jwt.views import ObtainJSONWebToken
 
 from django.conf import settings
 
-from .serializers import UserSerializer
+from .serializers import UserWithTodosSerializer
 
 jwt_config = getattr(settings, 'JWT_AUTH')
 
@@ -49,7 +49,7 @@ class UserData(APIView):
 
 	def get(self, request):
 		user = request.user
-		data = UserSerializer(user).data
+		data = UserWithTodosSerializer(user).data
 
 		response = Response({
 			'name': data.get('username'),
