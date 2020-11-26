@@ -14,7 +14,7 @@ class CreateTodo(APIView):
 		if is_valid:
 			todo.save()
 
-		return Response({ 'is_valid': is_valid })
+		return Response({ 'isValid': is_valid })
 
 
 create_todo = CreateTodo.as_view()
