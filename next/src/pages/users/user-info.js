@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import { wrapper } from '../stores/store';
 import { useAuthGuard } from '../../hooks';
+import { wrapper } from '../../stores/store';
 import { usersProvider } from '../../providers';
 
 function UserInfo(props) {
