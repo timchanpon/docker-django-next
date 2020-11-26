@@ -33,8 +33,6 @@ function TodoList() {
 	);
 }
 
-TodoList.getInitialProps = ctx => {
-	return useAuthGuard(ctx);
-}
+TodoList.getInitialProps = ctx => useAuthGuard(ctx);
 
 export default TodoList;
