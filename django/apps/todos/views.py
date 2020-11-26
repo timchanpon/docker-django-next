@@ -8,12 +8,14 @@ from .serializers import TodoSerializer
 class CreateTodo(APIView):
 
 	def post(self, request):
-		context = { 'user': request.user }
-		todo = TodoSerializer(data=request.data, context=context)
-		is_valid = todo.is_valid(raise_exception=True)
+		serializer = TodoSerializer(
+			data=request.data,
+			context={ 'user': request.user },
+		)
+		is_valid = serializer.is_valid(raise_exception=True)
 
 		if is_valid:
-			todo.save()
+			serializer.save()
 
 		return Response({ 'isValid': is_valid })
 
