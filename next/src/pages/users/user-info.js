@@ -14,7 +14,9 @@ function UserInfo(props) {
 }
 
 async function initProps(ctx) {
-	useAuthGuard(ctx);
+	const isAuth = useAuthGuard(ctx);
+
+	if (!isAuth) return;
 
 	const payload = {
 		withTodos: false,
