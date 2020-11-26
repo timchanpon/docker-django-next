@@ -5,6 +5,16 @@ from .models import Todo
 from .serializers import TodoSerializer
 
 
+class ListTodo(APIView):
+
+	def get(self, request):
+		user = request.user
+		todos = Todo.objects.filter(user=user)
+		serializer = TodoSerializer(todos)
+
+		return Response({ 'todos': serializer.data })
+
+
 class CreateTodo(APIView):
 
 	def post(self, request):
@@ -36,5 +46,6 @@ class UpdateTodo(APIView):
 		return Response({ 'isValid': is_valid })
 
 
+list_todo = ListTodo.as_view()
 create_todo = CreateTodo.as_view()
 update_todo = UpdateTodo.as_view()
