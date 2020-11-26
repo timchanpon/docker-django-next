@@ -3,6 +3,12 @@ import { callAPI } from '../request';
 const appPath = 'todos/';
 
 export default {
+	fetchTodoList() {
+		return callAPI({
+			method: 'GET',
+			url: appPath + 'list',
+		});
+	},
 	createTodo(payload) {
 		return callAPI({
 			method: 'POST',

@@ -7,9 +7,10 @@ const initialState = {
 function todosReducer(state=initialState, action) {
 	const type = action.type.replace(modulePrefix, '');
 
-	if (type === '') {
+	if (type === 'setTodoList') {
 		state = {
 			...state,
+			list: action.payload.todos,
 		};
 	}
 
