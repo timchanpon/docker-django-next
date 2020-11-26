@@ -12,4 +12,14 @@ export default {
 			},
 		});
 	},
+	updateTodo(payload) {
+		return callAPI({
+			method: 'POST',
+			url: appPath + 'update',
+			data: {
+				id: payload.id,
+				body: payload.body,
+			},
+		});
+	},
 };
