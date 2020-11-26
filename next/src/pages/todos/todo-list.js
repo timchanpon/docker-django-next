@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAuthGuard } from '../../hooks';
 import { todosProvider } from '../../providers';
 
-function CreateTodo() {
+function TodoList() {
 	const [isValid, setIsValid] = useState(false);
 
 	const submit = async (e) => {
@@ -33,8 +33,8 @@ function CreateTodo() {
 	);
 }
 
-CreateTodo.getInitialProps = ctx => {
+TodoList.getInitialProps = ctx => {
 	return useAuthGuard(ctx);
 }
 
-export default CreateTodo;
+export default TodoList;

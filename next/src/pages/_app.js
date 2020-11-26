@@ -15,8 +15,8 @@ function Root({ Component, pageProps }) {
 				<Link href="/users/user-info">
 					<button className="header-nav-btn">User Info</button>
 				</Link>
-				<Link href="/todos/create">
-					<button className="header-nav-btn">Create Todo</button>
+				<Link href="/todos/todo-list">
+					<button className="header-nav-btn">Todo List</button>
 				</Link>
 			</header>
 
