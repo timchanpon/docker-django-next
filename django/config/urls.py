@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 api = [
+	path('todos/', include('todos.urls')),
 	path('users/', include('users.urls')),
 ]
 
