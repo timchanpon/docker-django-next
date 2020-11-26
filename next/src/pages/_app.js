@@ -1,17 +1,24 @@
 import '../styles/app.scss';
 
-import { Provider } from 'react-redux';
-
-import store from '../stores/store';
+import { wrapper } from '../stores/store';
 import HeaderNav from '../components/base/headerNav';
 
 function Root({ Component, pageProps }) {
 	return (
-		<Provider store={store}>
+		<>
 			<HeaderNav />
 			<Component {...pageProps} />
-		</Provider>
+		</>
 	);
 }
 
-export default Root;
+Root.getInitialProps = async ({ Component, ctx }) => {
+	let props = {};
+
+	if (Component.getInitialProps)
+		props = await Component.getInitialProps(ctx);
+
+	return { props };
+};
+
+export default wrapper.withRedux(Root);

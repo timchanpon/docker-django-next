@@ -1,3 +1,6 @@
+import { connect } from 'react-redux';
+
+import { wrapper } from '../stores/store';
 import { useAuthGuard } from '../../hooks';
 import { usersProvider } from '../../providers';
 
@@ -10,7 +13,7 @@ function UserInfo(props) {
 	);
 }
 
-export async function getServerSideProps(ctx) {
+async function initProps(ctx) {
 	useAuthGuard(ctx);
 
 	const payload = {
@@ -26,4 +29,6 @@ export async function getServerSideProps(ctx) {
 	};
 }
 
-export default UserInfo;
+export const getServerSideProps = wrapper.getServerSideProps(initProps);
+
+export default connect(state => state)(UserInfo);
