@@ -47,8 +47,4 @@ function Index(props) {
 	);
 }
 
-function mapStateToProps(state) {
-	return state;
-};
-
-export default connect(mapStateToProps)(Index);
+export default connect(state => state)(Index);
