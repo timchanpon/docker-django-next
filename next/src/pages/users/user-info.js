@@ -19,8 +19,8 @@ function UserInfo(props) {
 export async function getServerSideProps(ctx) {
 	useAuthGuard(ctx);
 
-	const cookie = ctx.req.headers.cookie;
-	const { data } = await usersProvider.fetchUserData(cookie);
+	const payload = { cookie: ctx.req.headers.cookie };
+	const { data } = await usersProvider.fetchUserData(payload);
 
 	return {
 		props: {

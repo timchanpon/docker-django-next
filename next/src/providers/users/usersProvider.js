@@ -32,11 +32,14 @@ export default {
 			},
 		});
 	},
-	fetchUserData(cookie=null) {
+	fetchUserData(payload) {
 		return callAPI({
-			headers: setHeaders(cookie),
+			headers: setHeaders(payload.cookie),
 			method: 'GET',
 			url: appPath + 'data',
+			params: {
+				withTodos: payload.withTodos,
+			},
 		});
 	},
 };

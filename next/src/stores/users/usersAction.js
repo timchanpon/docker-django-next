@@ -18,9 +18,6 @@ const saga = {
 	logout: {
 		type: modulePrefix + 'saga/logout',
 	},
-	fetchUserData: {
-		type: modulePrefix + 'saga/fetchUserData',
-	},
 
 	// With payload
 	login(username, password) {
@@ -29,6 +26,14 @@ const saga = {
 			credentials: {
 				username: username,
 				password: password,
+			},
+		};
+	},
+	fetchUserData(payload) {
+		return {
+			type: modulePrefix + 'saga/fetchUserData',
+			payload: {
+				withTodos: payload.withTodos,
 			},
 		};
 	},
