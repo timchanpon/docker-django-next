@@ -14,7 +14,11 @@ function Index(props) {
 
 	const methods = {
 		login() {
-			const action = usersAction.saga.login(username, password);
+			const credentials = {
+				username: username,
+				password: password,
+			}
+			const action = usersAction.saga.login(credentials);
 
 			props.dispatch(action);
 		},

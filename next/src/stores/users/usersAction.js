@@ -20,12 +20,12 @@ const saga = {
 	},
 
 	// With payload
-	login(username, password) {
+	login(credentials) {
 		return {
 			type: modulePrefix + 'saga/login',
 			credentials: {
-				username: username,
-				password: password,
+				username: credentials.username,
+				password: credentials.password,
 			},
 		};
 	},
