@@ -6,7 +6,7 @@ from rest_framework_jwt.views import ObtainJSONWebToken
 
 from django.conf import settings
 
-from .serializers import UserWithTodosSerializer
+from .serializers import UserSerializer, UserWithTodosSerializer
 
 jwt_config = getattr(settings, 'JWT_AUTH')
 
@@ -48,16 +48,19 @@ class Logout(APIView):
 class UserData(APIView):
 
 	def get(self, request):
-		user = request.user
-		data = UserWithTodosSerializer(user).data
+		with_todos = request.query_params.get('withTodos') == 'true'
+		serializer = UserWithTodosSerializer if with_todos else UserSerializer
 
-		response = Response({
+		data = serializer(request.user).data
+		res_data = {
 			'name': data.get('username'),
 			'email': data.get('email'),
-			'todos': data.get('todos'),
-		})
+		}
 
-		return response
+		if with_todos:
+			res_data.update({ 'todos': data.get('todos') })
+
+		return Response(res_data)
 
 
 login = Login.as_view()
