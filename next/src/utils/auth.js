@@ -40,9 +40,7 @@ export function redirectToLoginPage({ res }) {
  * (HOC) Component wrapper with authentiation.
  *
  * @param {object} Component: wrapped component
- * @return isAuth
- * 					? {function} wrapper: getInitialProps
- * 					: {object} anonymous: Redirection (Promise)
+ * @return {function} wrapper
 **/
 export function withAuthGuard(Component) {
 	const wrapper = props => <Component {...props} />;
