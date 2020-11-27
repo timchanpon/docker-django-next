@@ -13,8 +13,9 @@ function Root({ Component, pageProps }) {
 }
 
 Root.getInitialProps = async ({ Component, ctx }) => {
-	return Component.getInitialProps
-					? await Component.getInitialProps(ctx) : {};
+	const { getInitialProps } = Component;
+
+	return getInitialProps && await getInitialProps(ctx);
 };
 
 export default withRedux(Root);

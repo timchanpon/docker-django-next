@@ -49,11 +49,11 @@ export function withAuthGuard(Component) {
 
 	wrapper.getInitialProps = async (ctx) => {
 		const isAuth = checkAuth(ctx);
+		const { getInitialProps } = Component;
 
 		if (!isAuth) return redirectToLoginPage(ctx);
 
-		return Component.getInitialProps
-						? await Component.getInitialProps(ctx) : {};
+		return getInitialProps && await getInitialProps(ctx);
 	};
 
 	return wrapper;
