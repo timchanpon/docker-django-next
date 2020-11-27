@@ -1,7 +1,4 @@
-import { connect } from 'react-redux';
-
-import { useAuthGuard } from '../../hooks';
-import { wrapper } from '../../stores/store';
+import { auth } from '../../utils/auth';
 import { usersProvider } from '../../providers';
 
 function UserInfo(props) {
@@ -13,11 +10,7 @@ function UserInfo(props) {
 	);
 }
 
-async function initProps(ctx) {
-	const isAuth = useAuthGuard(ctx);
-
-	if (!isAuth) return;
-
+async function initPropsSSR(ctx) {
 	const payload = {
 		withTodos: false,
 		cookie: ctx.req.headers.cookie,
@@ -31,6 +24,6 @@ async function initProps(ctx) {
 	};
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(initProps);
+export const getServerSideProps = ctx => auth.getServerSideProps(ctx, initPropsSSR);
 
-export default connect(state => state)(UserInfo);
+export default UserInfo;
