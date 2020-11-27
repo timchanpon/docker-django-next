@@ -1,6 +1,6 @@
 import '../styles/app.scss';
 
-import { wrapper } from '../stores/store';
+import { withRedux } from '../stores/store';
 import HeaderNav from '../components/base/headerNav';
 
 function Root({ Component, pageProps }) {
@@ -17,4 +17,4 @@ Root.getInitialProps = async ({ Component, ctx }) => {
 					? await Component.getInitialProps(ctx) : {};
 };
 
-export default wrapper.withRedux(Root);
+export default withRedux(Root);

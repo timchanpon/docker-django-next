@@ -17,4 +17,4 @@ function store() {
 	return storeInstance;
 }
 
-export const wrapper = createWrapper(store);
+export const { withRedux } = createWrapper(store);
