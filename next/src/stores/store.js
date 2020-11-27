@@ -12,7 +12,7 @@ function store() {
 		applyMiddleware(sagaMiddleware),
 	);
 
-	sagaMiddleware.run(rootSaga);
+	storeInstance.sagaTask = sagaMiddleware.run(rootSaga);
 
 	return storeInstance;
 }
