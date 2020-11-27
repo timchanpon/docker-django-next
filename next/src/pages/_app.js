@@ -13,12 +13,8 @@ function Root({ Component, pageProps }) {
 }
 
 Root.getInitialProps = async ({ Component, ctx }) => {
-	let props = {};
-
-	if (Component.getInitialProps)
-		props = await Component.getInitialProps(ctx);
-
-	return { props };
+	return Component.getInitialProps
+					? await Component.getInitialProps(ctx) : {};
 };
 
 export default wrapper.withRedux(Root);
