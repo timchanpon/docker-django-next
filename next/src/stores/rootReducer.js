@@ -8,4 +8,11 @@ const rootReducer = combineReducers({
 	user: usersReducer,
 });
 
-export default rootReducer;
+export default (state, action) => {
+	const { payload, type } = action;
+	const HYDRATE = '__NEXT_REDUX_WRAPPER_HYDRATE__';
+
+	if (type === HYDRATE) return payload;
+
+	return rootReducer(state, action);
+};
