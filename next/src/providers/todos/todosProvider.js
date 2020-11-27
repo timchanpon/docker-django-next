@@ -1,10 +1,11 @@
-import { callAPI } from '../request';
+import { callAPI, setCookieToRequest } from '../request';
 
 const appPath = 'todos/';
 
 export default {
-	fetchTodoList() {
+	fetchTodoList(payload) {
 		return callAPI({
+			headers: setCookieToRequest(payload.cookie),
 			method: 'GET',
 			url: appPath + 'list',
 		});

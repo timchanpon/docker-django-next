@@ -13,8 +13,14 @@ const reducer = {
 };
 
 const saga = {
-	fetchTodoList: {
-		type: modulePrefix + 'saga/fetchTodoList',
+	// With payload
+	fetchTodoList(payload) {
+		return {
+			type: modulePrefix + 'saga/fetchTodoList',
+			payload: {
+				cookie: payload.cookie,
+			},
+		};
 	},
 };
 
