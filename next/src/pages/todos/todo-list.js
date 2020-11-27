@@ -6,7 +6,7 @@ import { todosProvider } from '../../providers';
 import { withAuthGuard } from '../../utils/auth';
 import { todosAction } from '../../stores/actions';
 
-function TodoList() {
+function TodoList(props) {
 	const [isValid, setIsValid] = useState(false);
 
 	const submit = async (e) => {
@@ -28,10 +28,17 @@ function TodoList() {
 					max="20"
 					required
 				/>
-				<button type="submit">Submit</button>
+				<button type="submit">Add Todo</button>
+
+				{isValid && <span>&nbsp;&nbsp;Your todo has been created successfully.</span>}
 			</form>
 
-			{isValid && <p>Your todo has been created successfully.</p>}
+			<div>
+				<p>Your todos:</p>
+				<ul>
+					{props.todo.list.map((todo, index) => <li key={index}>{todo.body}</li>)}
+				</ul>
+			</div>
 		</>
 	);
 }
