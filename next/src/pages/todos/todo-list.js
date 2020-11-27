@@ -14,9 +14,12 @@ function TodoList(props) {
 
 		const payload = { body: e.target.body.value };
 		const { data } = await todosProvider.createTodo(payload);
+		const action = todosAction.saga.fetchTodoList();
 
+		props.dispatch(action);
+		e.target.body.value = '';
 		setIsValid(data.isValid);
-		setTimeout(() => setIsValid(false), 2500);
+		setTimeout(() => setIsValid(false), 2000);
 	}
 
 	return (

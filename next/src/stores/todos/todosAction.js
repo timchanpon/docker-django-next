@@ -18,7 +18,7 @@ const saga = {
 		return {
 			type: modulePrefix + 'saga/fetchTodoList',
 			payload: {
-				cookie: payload.cookie,
+				cookie: payload?.cookie,
 			},
 		};
 	},
