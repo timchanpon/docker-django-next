@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { useAuthGuard } from '../../hooks';
 import { todosProvider } from '../../providers';
+import { withAuthGuard } from '../../utils/auth';
 
 function TodoList() {
 	const [isValid, setIsValid] = useState(false);
@@ -33,6 +33,4 @@ function TodoList() {
 	);
 }
 
-TodoList.getInitialProps = ctx => useAuthGuard(ctx);
-
-export default TodoList;
+export default withAuthGuard(TodoList);
