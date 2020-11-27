@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
 
+import { withState } from '../stores/store';
 import { usersAction } from '../stores/actions';
 
 function Index(props) {
@@ -47,4 +47,4 @@ function Index(props) {
 	);
 }
 
-export default connect(state => state)(Index);
+export default withState(Index);

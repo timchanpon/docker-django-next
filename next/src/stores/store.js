@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { createWrapper } from 'next-redux-wrapper';
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware, { END } from 'redux-saga';
@@ -21,14 +21,7 @@ function store() {
 export const { withRedux } = createWrapper(store);
 
 export function withState(Component) {
-	const wrapper = props => {
-		props = {
-			...props,
-			...useSelector(state => state),
-		};
-
-		return <Component {...props} />;
-	};
+	const wrapper = props => <Component {...props} />;
 
 	wrapper.getInitialProps = async (ctx) => {
 		const { store } = ctx;
@@ -50,5 +43,5 @@ export function withState(Component) {
 		return props;
 	};
 
-	return wrapper;
+	return connect(state => state)(wrapper);
 }

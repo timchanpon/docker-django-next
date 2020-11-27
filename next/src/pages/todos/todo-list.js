@@ -1,7 +1,10 @@
+import { compose } from 'redux';
 import { useState } from 'react';
 
+import { withState } from '../../stores/store';
 import { todosProvider } from '../../providers';
 import { withAuthGuard } from '../../utils/auth';
+import { todosAction } from '../../stores/actions';
 
 function TodoList() {
 	const [isValid, setIsValid] = useState(false);
@@ -33,4 +36,11 @@ function TodoList() {
 	);
 }
 
-export default withAuthGuard(TodoList);
+TodoList.getInitialProps = async ({ req, store }) => {
+	const payload = process.browser ? {} : { cookie: req.headers.cookie };
+	const action = todosAction.saga.fetchTodoList(payload);
+
+	return await store.dispatch(action);
+};
+
+export default compose(withAuthGuard, withState)(TodoList);
