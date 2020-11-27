@@ -1,3 +1,4 @@
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -5,14 +6,13 @@ from .models import Todo
 from .serializers import TodoSerializer
 
 
-class ListTodo(APIView):
+class ListTodo(generics.ListAPIView):
+	serializer_class = TodoSerializer
 
-	def get(self, request):
-		user = request.user
-		todos = Todo.objects.filter(user=user)
-		serializer = TodoSerializer(todos)
+	def get_queryset(self):
+		user = self.request.user
 
-		return Response({ 'todos': serializer.data })
+		return Todo.objects.filter(user=user)
 
 
 class CreateTodo(APIView):
