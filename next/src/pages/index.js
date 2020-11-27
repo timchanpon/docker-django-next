@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
 
+import { withState } from '../stores/store';
 import { usersAction } from '../stores/actions';
 
 function Index(props) {
@@ -14,7 +14,11 @@ function Index(props) {
 
 	const methods = {
 		login() {
-			const action = usersAction.saga.login(username, password);
+			const credentials = {
+				username: username,
+				password: password,
+			}
+			const action = usersAction.saga.login(credentials);
 
 			props.dispatch(action);
 		},
@@ -43,8 +47,4 @@ function Index(props) {
 	);
 }
 
-function mapStateToProps(state) {
-	return state;
-};
-
-export default connect(mapStateToProps)(Index);
+export default withState(Index);

@@ -1,15 +1,7 @@
-import { callAPI } from '../request';
 import { isAuthCookieName } from '../../config';
+import { callAPI, setCookieToRequest } from '../request';
 
 const appPath = 'users/';
-
-function setHeaders(cookie) {
-	if (!cookie) return {};
-
-	return {
-		'Cookie': cookie,
-	};
-};
 
 export default {
 	login(credentials) {
@@ -32,11 +24,14 @@ export default {
 			},
 		});
 	},
-	fetchUserData(cookie=null) {
+	fetchUserData(payload) {
 		return callAPI({
-			headers: setHeaders(cookie),
+			headers: setCookieToRequest(payload.cookie),
 			method: 'GET',
 			url: appPath + 'data',
+			params: {
+				withTodos: payload.withTodos,
+			},
 		});
 	},
 };

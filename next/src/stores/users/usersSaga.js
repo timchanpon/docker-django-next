@@ -6,8 +6,11 @@ import { usersProvider } from '../../providers';
 
 function* login({ credentials }) {
 	try {
+		const payload = { withTodos: true };
+		const action = usersAction.saga.fetchUserData(payload);
+
 		yield call(usersProvider.login, credentials);
-		yield fork(fetchUserData);
+		yield put(action);
 	} catch (err) {
 		return console.error(err);
 	}
@@ -22,9 +25,9 @@ function* logout() {
 	}
 }
 
-function* fetchUserData() {
+function* fetchUserData({ payload }) {
 	try {
-		const { data } = yield call(usersProvider.fetchUserData);
+		const { data } = yield call(usersProvider.fetchUserData, payload);
 		const action = usersAction.setUserData(data);
 
 		yield put(action);

@@ -1,4 +1,4 @@
-import { useAuthGuard } from '../../hooks';
+import { auth } from '../../utils/auth';
 import { usersProvider } from '../../providers';
 
 function UserInfo(props) {
@@ -6,21 +6,16 @@ function UserInfo(props) {
 		<>
 			<p>Your name: {props.userInfo.name}</p>
 			<p>Your email: {props.userInfo.email}</p>
-			<div>
-				Your todos:
-				<ul>
-					{props.userInfo.todos.map((todo, index) => <li key={index}>{todo.body}</li>)}
-				</ul>
-			</div>
 		</>
 	);
 }
 
-export async function getServerSideProps(ctx) {
-	useAuthGuard(ctx);
-
-	const cookie = ctx.req.headers.cookie;
-	const { data } = await usersProvider.fetchUserData(cookie);
+async function initPropsSSR(ctx) {
+	const payload = {
+		withTodos: false,
+		cookie: ctx.req.headers.cookie,
+	};
+	const { data } = await usersProvider.fetchUserData(payload);
 
 	return {
 		props: {
@@ -28,5 +23,7 @@ export async function getServerSideProps(ctx) {
 		},
 	};
 }
+
+export const getServerSideProps = ctx => auth.getServerSideProps(ctx, initPropsSSR);
 
 export default UserInfo;
