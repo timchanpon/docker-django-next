@@ -3,12 +3,12 @@ import router from 'next/router';
 
 import { isAuthCookieName, pathToLoginPage } from '../config';
 
-/*
+/**
  * Check if user is authenticated.
  *
  * @param {object} req: context.req
  * @return {boolean} isAuth
-**/
+ */
 export function checkAuth({ req }) {
   let isAuth;
 
@@ -24,24 +24,24 @@ export function checkAuth({ req }) {
   return isAuth;
 }
 
-/*
+/**
  * Force redirect to login page.
  *
  * @param {object} res: context.res
  * @return {object} anonymous: Redirection (Promise)
-**/
+ */
 export function redirectToLoginPage({ res }) {
   return process.browser
           ? router.push(pathToLoginPage)
           : res.writeHead(302, { 'Location': pathToLoginPage }).end();
 };
 
-/*
+/**
  * (HOC) Component wrapper with authentiation.
  *
  * @param {object} Component: wrapped component
  * @return {function} wrapper
-**/
+ */
 export function withAuthGuard(Component) {
   const wrapper = props => <Component {...props} />;
 
@@ -57,7 +57,7 @@ export function withAuthGuard(Component) {
   return wrapper;
 }
 
-/*
+/**
  * Function wrapper for getServerSideProps with authentication.
  *
  * @param {object} ctx: context
@@ -65,7 +65,7 @@ export function withAuthGuard(Component) {
  * @return isAuth
  *          ? {object} anonymous: Result of wrapped function
  *          : {object} anonymous: Props
-**/
+ */
 export const auth = {
   getServerSideProps(ctx, wrappedFunc) {
     const isAuth = checkAuth(ctx);

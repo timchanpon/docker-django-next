@@ -29,12 +29,12 @@ export function withState(Component) {
     const props = getInitialProps && await getInitialProps(ctx);
 
     /*
-     * Await async sagaTask on server
-     *
-     * Reference:
-     *  - Usage with Redux Saga
-     *  - https://openbase.io/js/next-redux-wrapper/documentation
-    **/
+    * Await async sagaTask on server
+    *
+    * Reference:
+    *  - Usage with Redux Saga
+    *  - https://openbase.io/js/next-redux-wrapper/documentation
+    */
     if (!process.browser) {
       store.dispatch(END);
       await store.sagaTask.toPromise();
