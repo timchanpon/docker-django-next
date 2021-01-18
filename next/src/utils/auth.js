@@ -10,18 +10,18 @@ import { isAuthCookieName, pathToLoginPage } from '../config';
  * @return {boolean} isAuth
 **/
 export function checkAuth({ req }) {
-	let isAuth;
+  let isAuth;
 
-	if (process.browser) {
-		isAuth = cookie.get(isAuthCookieName) ? true : false;
-	} else {
-		const reqCookie = req.headers.cookie;
-		const isAuthCookie = reqCookie?.includes(isAuthCookieName + '=True');
+  if (process.browser) {
+    isAuth = cookie.get(isAuthCookieName) ? true : false;
+  } else {
+    const reqCookie = req.headers.cookie;
+    const isAuthCookie = reqCookie?.includes(isAuthCookieName + '=True');
 
-		isAuth = isAuthCookie ? true : false;
-	}
+    isAuth = isAuthCookie ? true : false;
+  }
 
-	return isAuth;
+  return isAuth;
 }
 
 /*
@@ -31,9 +31,9 @@ export function checkAuth({ req }) {
  * @return {object} anonymous: Redirection (Promise)
 **/
 export function redirectToLoginPage({ res }) {
-	return process.browser
-					? router.push(pathToLoginPage)
-					: res.writeHead(302, { 'Location': pathToLoginPage }).end();
+  return process.browser
+          ? router.push(pathToLoginPage)
+          : res.writeHead(302, { 'Location': pathToLoginPage }).end();
 };
 
 /*
@@ -43,18 +43,18 @@ export function redirectToLoginPage({ res }) {
  * @return {function} wrapper
 **/
 export function withAuthGuard(Component) {
-	const wrapper = props => <Component {...props} />;
+  const wrapper = props => <Component {...props} />;
 
-	wrapper.getInitialProps = async (ctx) => {
-		const isAuth = checkAuth(ctx);
-		const { getInitialProps } = Component;
+  wrapper.getInitialProps = async (ctx) => {
+    const isAuth = checkAuth(ctx);
+    const { getInitialProps } = Component;
 
-		if (!isAuth) return redirectToLoginPage(ctx);
+    if (!isAuth) return redirectToLoginPage(ctx);
 
-		return getInitialProps && await getInitialProps(ctx);
-	};
+    return getInitialProps && await getInitialProps(ctx);
+  };
 
-	return wrapper;
+  return wrapper;
 }
 
 /*
@@ -63,19 +63,19 @@ export function withAuthGuard(Component) {
  * @param {object} ctx: context
  * @param {function} wrappedFunc: getServerSideProps
  * @return isAuth
- * 					? {object} anonymous: Result of wrapped function
- * 					: {object} anonymous: Props
+ *          ? {object} anonymous: Result of wrapped function
+ *          : {object} anonymous: Props
 **/
 export const auth = {
-	getServerSideProps(ctx, wrappedFunc) {
-		const isAuth = checkAuth(ctx);
+  getServerSideProps(ctx, wrappedFunc) {
+    const isAuth = checkAuth(ctx);
 
-		if (!isAuth) {
-			redirectToLoginPage(ctx);
+    if (!isAuth) {
+      redirectToLoginPage(ctx);
 
-			return { props: {} };
-		}
+      return { props: {} };
+    }
 
-		return wrappedFunc(ctx);
-	},
+    return wrappedFunc(ctx);
+  },
 };

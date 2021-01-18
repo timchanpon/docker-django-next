@@ -1,20 +1,20 @@
 import { modulePrefix } from './config';
 
 const initialState = {
-	list: [],
+  list: [],
 };
 
 function todosReducer(state=initialState, action) {
-	const type = action.type.replace(modulePrefix, '');
+  const type = action.type.replace(modulePrefix, '');
 
-	if (type === 'setTodoList') {
-		state = {
-			...state,
-			list: action.payload.todos,
-		};
-	}
+  if (type === 'setTodoList') {
+    state = {
+      ...state,
+      list: action.payload.todos,
+    };
+  }
 
-	return state;
+  return state;
 }
 
 export default todosReducer;
