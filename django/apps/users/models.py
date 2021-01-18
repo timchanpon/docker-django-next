@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-	id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
 
-	class Meta:
-		db_table = 'users'
+    class Meta:
+        db_table = 'users'

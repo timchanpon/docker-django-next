@@ -4,8 +4,8 @@ import todosSaga from './todos/todosSaga';
 import usersSaga from './users/usersSaga';
 
 export default function* rootSaga() {
-	yield all([
-		todosSaga(),
-		usersSaga(),
-	]);
+  yield all([
+    todosSaga(),
+    usersSaga(),
+  ]);
 }

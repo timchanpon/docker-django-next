@@ -13,54 +13,54 @@ jwt_config = getattr(settings, 'JWT_AUTH')
 
 class Login(ObtainJSONWebToken):
 
-	def post(self, request, *args, **kwargs):
-		delta = jwt_config.get('JWT_EXPIRATION_DELTA')
-		expiration = datetime.utcnow() + delta
+    def post(self, request, *args, **kwargs):
+        delta = jwt_config.get('JWT_EXPIRATION_DELTA')
+        expiration = datetime.utcnow() + delta
 
-		response = super().post(request)
-		response.set_cookie(
-			request.data.get('isAuthCookieName'),
-			True,
-			expires=expiration,
-		)
+        response = super().post(request)
+        response.set_cookie(
+            request.data.get('isAuthCookieName'),
+            True,
+            expires=expiration,
+        )
 
-		return response
+        return response
 
 
 class Logout(APIView):
 
-	def post(self, request):
-		cookie = jwt_config.get('JWT_AUTH_COOKIE')
-		check_key = request.data.get('isAuthCookieName')
-		removal_targets = [
-			(cookie, None),
-			(check_key, False),
-		]
+    def post(self, request):
+        cookie = jwt_config.get('JWT_AUTH_COOKIE')
+        check_key = request.data.get('isAuthCookieName')
+        removal_targets = [
+            (cookie, None),
+            (check_key, False),
+        ]
 
-		response = Response()
+        response = Response()
 
-		for target in removal_targets:
-			response.set_cookie(*target, max_age=0)
+        for target in removal_targets:
+            response.set_cookie(*target, max_age=0)
 
-		return response
+        return response
 
 
 class UserData(APIView):
 
-	def get(self, request):
-		with_todos = request.query_params.get('withTodos') == 'true'
-		serializer = UserWithTodosSerializer if with_todos else UserSerializer
+    def get(self, request):
+        with_todos = request.query_params.get('withTodos') == 'true'
+        serializer = UserWithTodosSerializer if with_todos else UserSerializer
 
-		data = serializer(request.user).data
-		res_data = {
-			'name': data.get('username'),
-			'email': data.get('email'),
-		}
+        data = serializer(request.user).data
+        res_data = {
+            'name': data.get('username'),
+            'email': data.get('email'),
+        }
 
-		if with_todos:
-			res_data.update({ 'todos': data.get('todos') })
+        if with_todos:
+            res_data.update({ 'todos': data.get('todos') })
 
-		return Response(res_data)
+        return Response(res_data)
 
 
 login = Login.as_view()
