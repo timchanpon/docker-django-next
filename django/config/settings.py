@@ -37,48 +37,48 @@ CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
 # Application definition
 
 INSTALLED_APPS = [
-	'django.contrib.admin',
-	'django.contrib.auth',
-	'django.contrib.contenttypes',
-	'django.contrib.sessions',
-	'django.contrib.messages',
-	'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
-	'corsheaders',
-	'rest_framework',
+    'corsheaders',
+    'rest_framework',
 
-	'todos.apps.TodosConfig',
-	'users.apps.UsersConfig',
+    'todos.apps.TodosConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
-	'django.middleware.security.SecurityMiddleware',
-	'django.contrib.sessions.middleware.SessionMiddleware',
-	'django.middleware.common.CommonMiddleware',
-	'django.middleware.csrf.CsrfViewMiddleware',
-	'django.contrib.auth.middleware.AuthenticationMiddleware',
-	'django.contrib.messages.middleware.MessageMiddleware',
-	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-	'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
-	{
-		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [],
-		'APP_DIRS': True,
-		'OPTIONS': {
-			'context_processors': [
-				'django.template.context_processors.debug',
-				'django.template.context_processors.request',
-				'django.contrib.auth.context_processors.auth',
-				'django.contrib.messages.context_processors.messages',
-			],
-		},
-	},
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -88,14 +88,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.mysql',
-		'NAME': os.getenv('DB_NAME'),
-		'USER': os.getenv('DB_USER'),
-		'PASSWORD': os.getenv('DB_PASSWORD'),
-		'HOST': 'db',
-		'PORT': '3306',
-	},
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': 'db',
+        'PORT': '3306',
+    },
 }
 
 
@@ -103,18 +103,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-	{
-		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-	},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 
@@ -152,24 +152,24 @@ AUTH_USER_MODEL = 'users.User'
 # https://jpadilla.github.io/django-rest-framework-jwt/
 
 REST_FRAMEWORK = {
-	# Set default auth middlewares
-	'DEFAULT_PERMISSION_CLASSES': [
-		'rest_framework.permissions.IsAuthenticated',
-	],
-	'DEFAULT_AUTHENTICATION_CLASSES': [
-		'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-	],
+    # Set default auth middlewares
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ],
 }
 
 jwt_expires_sec = os.getenv('JWT_EXPIRATION_DELTA_SECONDS')
 jwt_expires_sec = int(jwt_expires_sec)
 
 JWT_AUTH = {
-	# JWTs are transmitted via cookie
-	'JWT_AUTH_COOKIE': os.getenv('JWT_AUTH_COOKIE'),
+    # JWTs are transmitted via cookie
+    'JWT_AUTH_COOKIE': os.getenv('JWT_AUTH_COOKIE'),
 
-	# Expiration date of JWTs in seconds
-	'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=jwt_expires_sec),
+    # Expiration date of JWTs in seconds
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=jwt_expires_sec),
 }
 
 
@@ -177,11 +177,11 @@ JWT_AUTH = {
 # https://docs.djangoproject.com/en/3.1/topics/cache/
 
 CACHES = {
-	'default': {
-		'BACKEND': 'django_redis.cache.RedisCache',
-		'LOCATION': 'redis://cache:6379/0',
-		'OPTIONS': {
-			'PASSWORD': os.getenv('REDIS_PASSWORD'),
-		},
-	},
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://cache:6379/0',
+        'OPTIONS': {
+            'PASSWORD': os.getenv('REDIS_PASSWORD'),
+        },
+    },
 }
